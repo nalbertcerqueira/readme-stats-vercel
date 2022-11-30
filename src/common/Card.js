@@ -131,6 +131,7 @@ class Card {
     if (typeof this.colors.bgColor !== "object") return "";
 
     const gradients = this.colors.bgColor.slice(1);
+
     return typeof this.colors.bgColor === "object"
       ? `
         <defs>
@@ -141,7 +142,25 @@ class Card {
           >
             ${gradients.map((grad, index) => {
               let offset = (index * 100) / (gradients.length - 1);
-              return `<stop offset="${offset}%" stop-color="#${grad}" />`;
+              let temporary = []
+
+              let animateGrad = gradients.reduce((acc, gradRed, indexRed) => {
+                if (index > indexRed) {
+                  temporary.push(`#${gradRed}`)
+                  return acc
+                }
+                acc.push(`#${gradRed}`)
+                return acc
+              }, [])
+
+              temporary.push(grad)
+              animateGrad.push.apply(animateGrad, temporary)
+
+              const result = animateGrad.join(";")
+              return `
+              <stop offset="${offset}%" stop-color="#${grad}">
+                <animate attributeName="stop-color" values="${result}" dur="4s" repeatCount="indefinite"></animate>
+              </stop>`;
             })}
           </linearGradient>
         </defs>
