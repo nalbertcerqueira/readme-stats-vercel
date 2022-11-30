@@ -43,6 +43,11 @@ const getProgressAnimation = ({ progress }) => {
 const getAnimations = () => {
   return `
     /* Animations */
+    @keyframes rotate{
+      to{
+        transform: rotate(360deg)
+      }
+    }
     @keyframes scaleInAnimation {
       from {
         transform: translate(-5px, 5px) scale(0);
@@ -119,11 +124,11 @@ const getStyles = ({
       stroke-linecap: round;
       opacity: 0.8;
       transform-origin: -10px 8px;
-      transform: rotate(-90deg);
-      animation: rankAnimation 1s forwards ease-in-out;
+      animation: rankAnimation 1s forwards ease-in-out, rotate 2s linear infinite;
     }
     ${process.env.NODE_ENV === "test" ? "" : getProgressAnimation({ progress })}
   `;
 };
 
 export { getStyles, getAnimations };
+
