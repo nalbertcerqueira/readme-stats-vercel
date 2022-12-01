@@ -22,12 +22,15 @@ class Card {
     customTitle,
     defaultTitle = "",
     titlePrefixIcon,
+    gradient_animation,
   }) {
     this.width = width;
     this.height = height;
 
     this.hideBorder = false;
     this.hideTitle = false;
+
+    this.gradient_animation = gradient_animation
 
     this.border_radius = border_radius;
 
@@ -143,20 +146,23 @@ class Card {
             ${gradients.map((grad, index) => {
               let offset = (index * 100) / (gradients.length - 1);
               let temporary = []
+              let animateGrad = `#${grad}`
 
-              let animateGrad = gradients.reduce((acc, gradRed, indexRed) => {
-                if (index > indexRed) {
-                  temporary.push(`#${gradRed}`)
+              if (this.gradient_animation === true){
+                animateGrad = gradients.reduce((acc, gradRed, indexRed) => {
+                  if (index > indexRed) {
+                    temporary.push(`#${gradRed}`)
+                    return acc
+                  }
+                  acc.push(`#${gradRed}`)
                   return acc
-                }
-                acc.push(`#${gradRed}`)
-                return acc
-              }, [])
+                }, [])
+              }
 
               temporary.push(`#${grad}`)
               animateGrad.push.apply(animateGrad, temporary)
-
               const result = animateGrad.join(";")
+
               return `
               <stop offset="${offset}%" stop-color="#${grad}">
                 <animate attributeName="stop-color" values="${result}" dur="4s" repeatCount="indefinite"></animate>

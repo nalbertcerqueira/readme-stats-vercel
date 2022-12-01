@@ -5,7 +5,7 @@ import {
   CONSTANTS,
   parseArray,
   parseBoolean,
-  renderError,
+  renderError
 } from "../src/common/utils.js";
 import { fetchStats } from "../src/fetchers/stats-fetcher.js";
 import { isLocaleAvailable } from "../src/translations.js";
@@ -36,6 +36,7 @@ export default async (req, res) => {
     disable_animations,
     border_radius,
     border_color,
+    gradient_animation,
   } = req.query;
   res.setHeader("Content-Type", "image/svg+xml");
 
@@ -90,6 +91,7 @@ export default async (req, res) => {
         border_color,
         locale: locale ? locale.toLowerCase() : null,
         disable_animations: parseBoolean(disable_animations),
+        gradient_animation,
       }),
     );
   } catch (err) {

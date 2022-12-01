@@ -7,7 +7,7 @@ import {
   flexLayout,
   getCardColors,
   kFormatter,
-  measureText,
+  measureText
 } from "../common/utils.js";
 import { getStyles } from "../getStyles.js";
 import { statCardLocales } from "../translations.js";
@@ -100,6 +100,7 @@ const renderStatsCard = (stats = {}, options = { hide: [] }) => {
     border_color,
     locale,
     disable_animations = false,
+    gradient_animation,
   } = options;
 
   const lheight = parseInt(String(line_height), 10);
@@ -241,6 +242,7 @@ const renderStatsCard = (stats = {}, options = { hide: [] }) => {
       bgColor,
       borderColor,
     },
+    gradient_animation,
   });
 
   card.setHideBorder(hide_border);
