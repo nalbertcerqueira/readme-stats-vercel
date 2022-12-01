@@ -153,7 +153,7 @@ class Card {
                 return acc
               }, [])
 
-              temporary.push(grad)
+              temporary.push(`#${grad}`)
               animateGrad.push.apply(animateGrad, temporary)
 
               const result = animateGrad.join(";")
