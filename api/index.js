@@ -91,7 +91,7 @@ export default async (req, res) => {
         border_color,
         locale: locale ? locale.toLowerCase() : null,
         disable_animations: parseBoolean(disable_animations),
-        gradient_animation,
+        gradient_animation:parseBoolean(gradient_animation)
       }),
     );
   } catch (err) {

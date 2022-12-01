@@ -147,6 +147,7 @@ class Card {
               let offset = (index * 100) / (gradients.length - 1);
               let temporary = []
               let animateGrad = `#${grad}`
+              let result = animateGrad
 
               if (this.gradient_animation === true){
                 animateGrad = gradients.reduce((acc, gradRed, indexRed) => {
@@ -157,11 +158,13 @@ class Card {
                   acc.push(`#${gradRed}`)
                   return acc
                 }, [])
+
+                temporary.push(`#${grad}`)
+                animateGrad.push.apply(animateGrad, temporary)
+                result = animateGrad.join(";")
               }
 
-              temporary.push(`#${grad}`)
-              animateGrad.push.apply(animateGrad, temporary)
-              const result = animateGrad.join(";")
+              
 
               return `
               <stop offset="${offset}%" stop-color="#${grad}">
