@@ -163,9 +163,7 @@ class Card {
                 animateGrad.push.apply(animateGrad, temporary)
                 result = animateGrad.join(";")
               }
-
               
-
               return `
               <stop offset="${offset}%" stop-color="#${grad}">
                 <animate attributeName="stop-color" values="${result}" dur="4s" repeatCount="indefinite"></animate>
